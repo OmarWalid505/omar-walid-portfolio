@@ -44,4 +44,17 @@ dialog.addEventListener("click", event => {
   if (event.target === dialog) dialog.close();
 });
 document.getElementById("year").textContent = new Date().getFullYear();
-console.log("Supabase client:", supabaseClient);
+async function testSupabaseConnection() {
+  const { data, error } = await supabaseClient
+    .from("projects")
+    .select("*")
+    .limit(1);
+
+  if (error) {
+    console.error("Supabase connection test:", error.message);
+  } else {
+    console.log("Supabase database connected:", data);
+  }
+}
+
+testSupabaseConnection();
