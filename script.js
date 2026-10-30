@@ -14,47 +14,157 @@ document.getElementById("themeToggle").addEventListener("click", () => {
   document.body.classList.toggle("light");
 });
 
+
 const filters = document.querySelectorAll(".filter");
-const projects = document.querySelectorAll(".project-card");
+const projectGrid = document.getElementById("projectGrid");
+const dialog = document.getElementById("projectDialog");
+
+// فلترة المشاريع
 function applyFilter(category) {
+  const projects = document.querySelectorAll(".project-card");
+
   projects.forEach(project => {
-    project.classList.toggle("hidden", category !== "All" && project.dataset.category !== category);
+    const projectCategory = project.dataset.category;
+
+    const matches =
+      category === "All" ||
+      projectCategory === category ||
+      (category === "Multimedia" &&
+        ["Video Editing", "Graphic Design"].includes(projectCategory));
+
+    project.classList.toggle("hidden", !matches);
   });
-  filters.forEach(button => button.classList.toggle("active", button.dataset.filter === category));
+
+  filters.forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.filter === category
+    );
+  });
 }
-filters.forEach(button => button.addEventListener("click", () => applyFilter(button.dataset.filter)));
-document.querySelectorAll(".specialty-card[data-filter]").forEach(card => {
-  card.addEventListener("click", () => applyFilter(card.dataset.filter));
-});
-document.querySelectorAll(".multimedia-subcategories button").forEach(button => {
-  button.addEventListener("click", () => applyFilter(button.dataset.filter));
+
+filters.forEach(button => {
+  button.addEventListener("click", () => {
+    applyFilter(button.dataset.filter);
+  });
 });
 
-const dialog = document.getElementById("projectDialog");
-document.querySelectorAll(".details-button").forEach(button => {
-  button.addEventListener("click", () => {
-    document.getElementById("dialogTitle").textContent = button.dataset.title;
-    document.getElementById("dialogDescription").textContent = button.dataset.description;
-    document.getElementById("dialogTools").textContent = "Tools: " + button.dataset.tools;
-    dialog.showModal();
+document.querySelectorAll(".specialty-card[data-filter]").forEach(card => {
+  card.addEventListener("click", () => {
+    applyFilter(card.dataset.filter);
   });
 });
-document.getElementById("dialogClose").addEventListener("click", () => dialog.close());
-dialog.addEventListener("click", event => {
-  if (event.target === dialog) dialog.close();
+
+document.querySelectorAll(".multimedia-subcategories button").forEach(button => {
+  button.addEventListener("click", () => {
+    applyFilter(button.dataset.filter);
+  });
 });
-document.getElementById("year").textContent = new Date().getFullYear();
-async function testSupabaseConnection() {
+
+// حماية النصوص
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  })[char]);
+}
+
+// تحميل المشاريع من Supabase
+async function loadPortfolioProjects() {
+  projectGrid.innerHTML = "<p>Loading projects...</p>";
+
   const { data, error } = await supabaseClient
     .from("projects")
     .select("*")
-    .limit(1);
+    .order("created_at", { ascending: false });
 
   if (error) {
-    console.error("Supabase connection test:", error.message);
-  } else {
-    console.log("Supabase database connected:", data);
+    console.error("Projects loading error:", error.message);
+    projectGrid.textContent = "Unable to load projects.";
+    return;
   }
+
+  projectGrid.replaceChildren();
+
+  if (data.length === 0) {
+    projectGrid.textContent = "No projects available yet.";
+    return;
+  }
+
+  data.forEach(project => {
+    const card = document.createElement("article");
+    card.className = "project-card";
+    card.dataset.category = project.category;
+
+    let thumbnail = `<span>${escapeHTML(project.category)}</span>`;
+
+    if (project.image_url) {
+      thumbnail = `<img src="${escapeHTML(project.image_url)}" alt="${escapeHTML(project.title)}">`;
+    } else if (project.video_url) {
+      thumbnail = `<video src="${escapeHTML(project.video_url)}" muted playsinline preload="metadata"></video>`;
+    }
+
+    card.innerHTML = `
+      <div class="project-thumb">
+        ${thumbnail}
+      </div>
+
+      <div class="project-info">
+        <div>
+          <h3>${escapeHTML(project.title)}</h3>
+          <p>${escapeHTML(project.description)}</p>
+        </div>
+
+        <button
+          class="details-button"
+          data-title="${escapeHTML(project.title)}"
+          data-description="${escapeHTML(project.description)}"
+          data-tools="${escapeHTML(project.tools)}"
+          type="button">
+          ↗
+        </button>
+      </div>
+
+      <span class="tag">${escapeHTML(project.category)}</span>
+    `;
+
+    projectGrid.appendChild(card);
+  });
+
+  applyFilter("All");
 }
 
-testSupabaseConnection();
+// تفاصيل المشروع
+projectGrid.addEventListener("click", event => {
+  const button = event.target.closest(".details-button");
+
+  if (!button) return;
+
+  document.getElementById("dialogTitle").textContent =
+    button.dataset.title;
+
+  document.getElementById("dialogDescription").textContent =
+    button.dataset.description;
+
+  document.getElementById("dialogTools").textContent =
+    "Tools: " + button.dataset.tools;
+
+  dialog.showModal();
+});
+
+document.getElementById("dialogClose").addEventListener("click", () => {
+  dialog.close();
+});
+
+dialog.addEventListener("click", event => {
+  if (event.target === dialog) dialog.close();
+});
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+// تشغيل تحميل المشاريع
+loadPortfolioProjects();
