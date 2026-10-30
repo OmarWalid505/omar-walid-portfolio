@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Omar Walid — Creative Developer & Multimedia Designer. Explore programming, video editing, graphic design and multimedia projects.">
+  <meta name="description" content="Omar Walid — Creative Developer & Multimedia Designer. Explore programming and multimedia projects, including video editing and graphic design.">
   <title>OMAR WALID | Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -54,7 +54,7 @@
         <div><p class="eyebrow"><i></i> MY SPECIALIZATIONS</p><h2>What I Do</h2></div>
         <p class="section-note">I work across multiple creative fields, combining technology and design to deliver meaningful results.</p>
       </div>
-      <div class="specialty-grid">
+      <div class="specialty-grid specialty-grid-two">
         <a class="specialty-card" href="#projects" data-filter="Programming">
           <div class="card-art code-art"><span>&lt;/&gt;</span><pre>class Project {
   void create() {
@@ -63,18 +63,14 @@
 }</pre></div>
           <h3>Programming</h3><p>Software development & coding projects</p><span class="round-arrow">↗</span>
         </a>
-        <a class="specialty-card" href="#projects" data-filter="Video Editing">
-          <div class="card-art video-art"><span>▶</span><div class="timeline"><i></i><i></i><i></i></div></div>
-          <h3>Video Editing</h3><p>Video production & motion graphics</p><span class="round-arrow">↗</span>
-        </a>
-        <a class="specialty-card" href="#projects" data-filter="Graphic Design">
-          <div class="card-art design-art"><span>✦</span><div class="poster">IDEAS<br><b>IN<br>FORM</b></div></div>
-          <h3>Graphic Design</h3><p>Visual identity & creative designs</p><span class="round-arrow">↗</span>
-        </a>
-        <a class="specialty-card" href="#projects" data-filter="Multimedia">
+        <div class="specialty-card multimedia-card">
           <div class="card-art media-art"><span>◇</span><div class="sphere"></div></div>
-          <h3>Multimedia</h3><p>Animation & digital media</p><span class="round-arrow">↗</span>
-        </a>
+          <h3>Multimedia</h3><p>Creative visual content and digital storytelling</p>
+          <div class="multimedia-subcategories">
+            <button type="button" data-filter="Video Editing">Video Editing <span>↗</span></button>
+            <button type="button" data-filter="Graphic Design">Graphic Design <span>↗</span></button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -86,9 +82,8 @@
           <div class="filters" role="group" aria-label="Filter projects">
             <button class="filter active" data-filter="All">All</button>
             <button class="filter" data-filter="Programming">Programming</button>
-            <button class="filter" data-filter="Video Editing">Video</button>
-            <button class="filter" data-filter="Graphic Design">Design</button>
-            <button class="filter" data-filter="Multimedia">Multimedia</button>
+            <button class="filter" data-filter="Video Editing">Video Editing</button>
+            <button class="filter" data-filter="Graphic Design">Graphic Design</button>
           </div>
         </div>
       </div>
@@ -108,18 +103,13 @@
           <div class="project-info"><div><h3>Movie Poster Design</h3><p>Poster & typography</p></div><button class="details-button" data-title="Movie Poster Design" data-description="A graphic design project. Explain the visual direction, audience and design tools used." data-tools="Photoshop, Illustrator">↗</button></div>
           <span class="tag">Graphic Design</span>
         </article>
-        <article class="project-card" data-category="Multimedia">
-          <div class="project-thumb thumb-media"><span>3D / MOTION</span></div>
-          <div class="project-info"><div><h3>Animation Concept</h3><p>Digital media experiment</p></div><button class="details-button" data-title="Animation Concept" data-description="A multimedia or animation project. Add the story, technique and software used." data-tools="After Effects, Blender">↗</button></div>
-          <span class="tag">Multimedia</span>
-        </article>
       </div>
       <p class="edit-hint">Demo projects are placeholders — replace them with your real work before publishing.</p>
     </section>
 
     <section class="section-wrap about" id="about">
       <div class="about-copy"><p class="eyebrow"><i></i> ABOUT ME</p><h2>More About Me</h2>
-        <p>I'm Omar Walid, a multimedia student and creative professional interested in technology, design and storytelling. I enjoy turning ideas into real projects through code, video editing, graphic design and multimedia content.</p>
+        <p>I'm Omar Walid, a multimedia student and creative professional interested in technology, design and storytelling. I enjoy turning ideas into real projects through code and multimedia, with a focus on video editing and graphic design.</p>
         <a class="button button-outline" href="#contact">LET'S CONNECT <span>→</span></a>
       </div>
       <div class="about-facts">

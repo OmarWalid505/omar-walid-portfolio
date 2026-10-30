@@ -25,3 +25,13 @@ body.light{--bg:#f4f7fb;--panel:#fff;--panel2:#fff;--text:#101827;--muted:#64748
 @media(max-width:850px){nav{gap:13px}.specialty-grid,.project-grid{grid-template-columns:repeat(2,1fr)}.about{grid-template-columns:1fr 1fr}.skills{grid-column:1/-1}.about-facts{border-right:0}.hero{min-height:440px}}
 @media(max-width:620px){.site-header{height:65px}.menu-toggle{display:block;margin-left:auto;margin-right:15px}nav{display:none;position:absolute;top:64px;left:0;right:0;padding:18px 6%;background:var(--panel);border-bottom:1px solid var(--line);flex-direction:column;gap:17px}nav.open{display:flex}.hero{grid-template-columns:1fr;padding-top:55px;gap:5px}.hero-art{height:260px}.hero-copy{z-index:1}.section-heading{align-items:start;flex-direction:column}.project-tools{justify-content:start}.section-note{max-width:100%}.specialty-grid,.project-grid{gap:10px}.specialty-card{padding:9px;min-height:205px}.card-art{height:90px}.project-thumb{height:100px}.about{grid-template-columns:1fr;gap:25px}.about-facts{border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0}.skills{grid-column:auto}.contact{grid-template-columns:1fr}.contact-links{grid-template-columns:1fr 1fr}footer{gap:12px;flex-wrap:wrap}footer p{order:3;width:100%}}
 @media(max-width:370px){.specialty-grid,.project-grid{grid-template-columns:1fr}.contact-links{grid-template-columns:1fr}.hero h1{font-size:43px}}
+
+
+/* Portfolio hierarchy: Programming + Multimedia (Video Editing / Graphic Design) */
+.specialty-grid-two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.multimedia-card { position: relative; cursor: default; }
+.multimedia-subcategories { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.multimedia-subcategories button { border: 1px solid var(--border, rgba(255,255,255,.16)); background: transparent; color: inherit; padding: 10px 14px; border-radius: 8px; font: inherit; cursor: pointer; transition: .2s ease; }
+.multimedia-subcategories button:hover { border-color: var(--accent, #3988ff); color: var(--accent, #3988ff); }
+.multimedia-subcategories button span { margin-left: 8px; }
+@media (max-width: 700px) { .specialty-grid-two { grid-template-columns: 1fr; } }

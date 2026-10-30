@@ -20,3 +20,12 @@ A responsive personal portfolio built with plain HTML, CSS and JavaScript.
 - Replace demo project cards and descriptions with your real projects.
 - Replace the decorative portrait placeholder in the hero with your own image if desired.
 - Edit colors in `:root` at the top of `style.css` (`--blue` and `--blue2`).
+
+
+## Portfolio structure
+- Programming (main section)
+- Multimedia (main section)
+  - Video Editing
+  - Graphic Design
+
+The Multimedia subcategory buttons filter the matching projects below.

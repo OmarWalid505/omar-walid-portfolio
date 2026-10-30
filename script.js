@@ -16,11 +16,11 @@ function applyFilter(category) {
   filters.forEach(button => button.classList.toggle("active", button.dataset.filter === category));
 }
 filters.forEach(button => button.addEventListener("click", () => applyFilter(button.dataset.filter)));
-document.querySelectorAll(".specialty-card").forEach(card => {
-  card.addEventListener("click", () => {
-    const category = card.dataset.filter;
-    applyFilter(category);
-  });
+document.querySelectorAll(".specialty-card[data-filter]").forEach(card => {
+  card.addEventListener("click", () => applyFilter(card.dataset.filter));
+});
+document.querySelectorAll(".multimedia-subcategories button").forEach(button => {
+  button.addEventListener("click", () => applyFilter(button.dataset.filter));
 });
 
 const dialog = document.getElementById("projectDialog");
