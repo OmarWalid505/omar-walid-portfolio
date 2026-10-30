@@ -138,33 +138,117 @@ async function loadPortfolioProjects() {
 }
 
 // تفاصيل المشروع
-projectGrid.addEventListener("click", event => {
-  const button = event.target.closest(".details-button");
+// Image Gallery
+const imageViewer = document.getElementById("imageViewer");
+const viewerImage = document.getElementById("viewerImage");
+const imageViewerClose = document.getElementById("imageViewerClose");
+const prevImage = document.getElementById("prevImage");
+const nextImage = document.getElementById("nextImage");
+const imageCounter = document.getElementById("imageCounter");
 
-  if (!button) return;
+let galleryImages = [];
+let currentImageIndex = 0;
 
-  document.getElementById("dialogTitle").textContent =
-    button.dataset.title;
+function showGalleryImage() {
+  viewerImage.src = galleryImages[currentImageIndex];
 
-  document.getElementById("dialogDescription").textContent =
-    button.dataset.description;
+  imageCounter.textContent =
+    `${currentImageIndex + 1} / ${galleryImages.length}`;
 
-  document.getElementById("dialogTools").textContent =
-    "Tools: " + button.dataset.tools;
+  prevImage.style.display =
+    galleryImages.length > 1 ? "block" : "none";
 
-  dialog.showModal();
+  nextImage.style.display =
+    galleryImages.length > 1 ? "block" : "none";
+}
+
+function openGallery(images, index) {
+  galleryImages = images;
+  currentImageIndex = index;
+
+  showGalleryImage();
+  imageViewer.showModal();
+}
+
+function changeGalleryImage(direction) {
+  currentImageIndex =
+    (currentImageIndex + direction + galleryImages.length) %
+    galleryImages.length;
+
+  showGalleryImage();
+}
+
+prevImage.addEventListener("click", () => {
+  changeGalleryImage(-1);
 });
 
+nextImage.addEventListener("click", () => {
+  changeGalleryImage(1);
+});
+
+imageViewerClose.addEventListener("click", () => {
+  imageViewer.close();
+});
+
+imageViewer.addEventListener("click", event => {
+  if (event.target === imageViewer) {
+    imageViewer.close();
+  }
+});
+
+// Project Details and Image Click
+projectGrid.addEventListener("click", event => {
+
+  const button = event.target.closest(".details-button");
+
+  if (button) {
+    document.getElementById("dialogTitle").textContent =
+      button.dataset.title;
+
+    document.getElementById("dialogDescription").textContent =
+      button.dataset.description;
+
+    document.getElementById("dialogTools").textContent =
+      "Tools: " + button.dataset.tools;
+
+    dialog.showModal();
+    return;
+  }
+
+  const image = event.target.closest(".project-thumb img");
+
+  if (image) {
+    openGallery([image.src], 0);
+  }
+});
+
+// Close Project Details
 document.getElementById("dialogClose").addEventListener("click", () => {
   dialog.close();
 });
 
 dialog.addEventListener("click", event => {
-  if (event.target === dialog) dialog.close();
+  if (event.target === dialog) {
+    dialog.close();
+  }
 });
 
+// Keyboard Navigation
+document.addEventListener("keydown", event => {
+  if (!imageViewer.open) return;
+
+  if (event.key === "ArrowRight") {
+    changeGalleryImage(1);
+  }
+
+  if (event.key === "ArrowLeft") {
+    changeGalleryImage(-1);
+  }
+});
+
+// Current Year
 document.getElementById("year").textContent =
   new Date().getFullYear();
 
-// تشغيل تحميل المشاريع
+// Load Projects
 loadPortfolioProjects();
