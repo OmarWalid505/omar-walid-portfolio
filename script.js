@@ -1,3 +1,10 @@
+const SUPABASE_URL = "https://kpdigtstlicertcclqyd.supabase.co";
+const SUPABASE_KEY = "sb_publishable_q63m2BV5Bl4PzayE_rhm-A_rvOltDfq";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 const menuToggle = document.getElementById("menuToggle");
 const nav = document.getElementById("nav");
 menuToggle.addEventListener("click", () => nav.classList.toggle("open"));
