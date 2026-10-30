@@ -44,3 +44,4 @@ dialog.addEventListener("click", event => {
   if (event.target === dialog) dialog.close();
 });
 document.getElementById("year").textContent = new Date().getFullYear();
+console.log("Supabase client:", supabaseClient);
