@@ -38,12 +38,12 @@ body.light{--bg:#f4f7fb;--panel:#fff;--panel2:#fff;--text:#101827;--muted:#64748
 /* Dynamic portfolio media */
 .project-thumb {
   width: 100%;
-  height: 200px;
+  height: 260px;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: transparent;
+  background: #17120e;
 }
 
 .project-thumb img,
