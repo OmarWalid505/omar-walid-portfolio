@@ -273,4 +273,13 @@ document.getElementById("year").textContent =
   new Date().getFullYear();
 
 // Load Projects
-loadPortfolioProjects();
+// Load Projects
+loadPortfolioProjects().then(() => {
+  if (window.location.hash === "#contact") {
+    setTimeout(() => {
+      document.getElementById("contact").scrollIntoView({
+        behavior: "smooth"
+      });
+    }, 500);
+  }
+});
