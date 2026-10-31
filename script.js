@@ -273,25 +273,8 @@ document.getElementById("year").textContent =
   new Date().getFullYear();
 
 // Load Projects
-if (window.location.hash === "#contact") {
-  history.scrollRestoration = "manual";
-}
-
-loadPortfolioProjects().then(async () => {
-  if (window.location.hash === "#contact") {
-    const images = [...document.querySelectorAll("#projectGrid img")];
-
-    await Promise.all(
-      images.map(img => {
-        if (img.complete) return Promise.resolve();
-
-        return new Promise(resolve => {
-          img.addEventListener("load", resolve, { once: true });
-          img.addEventListener("error", resolve, { once: true });
-        });
-      })
-    );
 
     document.getElementById("contact").scrollIntoView();
   }
 });
+loadPortfolioProjects();
