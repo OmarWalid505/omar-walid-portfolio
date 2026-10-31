@@ -51,6 +51,27 @@
     </form>
 
     <section id="dashboard" hidden>
+      <hr>
+
+<h2>CV Management</h2>
+<p>رفع أو استبدال ملف السيرة الذاتية</p>
+
+<form class="admin-form" id="cvForm">
+  <label for="cvFile">اختيار ملف CV بصيغة PDF</label>
+  <input
+    type="file"
+    id="cvFile"
+    accept=".pdf,application/pdf"
+    required
+  >
+
+  <button type="submit">Upload CV</button>
+  <p id="cvMessage"></p>
+</form>
+
+<div id="cvStatus"></div>
+
+<hr>
       <h2>إضافة مشروع جديد</h2>
 
       <form class="admin-form" id="projectForm">
