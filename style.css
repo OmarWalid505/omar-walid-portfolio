@@ -157,3 +157,7 @@ dialog.image-viewer::backdrop {
   display: block;
   border-radius: 5px;
 }
+#about,
+#contact {
+  scroll-margin-top: 90px;
+}
