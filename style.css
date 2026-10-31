@@ -138,3 +138,6 @@ body.light{--bg:#f4f7fb;--panel:#fff;--panel2:#fff;--text:#101827;--muted:#64748
     padding: 35px 10px;
   }
 }
+.project-thumb img {
+  cursor: zoom-in;
+}
