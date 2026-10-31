@@ -13,6 +13,11 @@ const dashboard = document.getElementById("dashboard");
 const loginMessage = document.getElementById("loginMessage");
 const projectMessage = document.getElementById("projectMessage");
 const projectsList = document.getElementById("projectsList");
+const cvForm = document.getElementById("cvForm");
+const cvMessage = document.getElementById("cvMessage");
+const cvStatus = document.getElementById("cvStatus");
+
+const CV_PATH = "cv/current.pdf";
 
 const BUCKET = "portfolio-media";
 const CLOUDINARY_CLOUD_NAME = "eanf63bz";
