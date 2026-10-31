@@ -15,7 +15,8 @@ const projectMessage = document.getElementById("projectMessage");
 const projectsList = document.getElementById("projectsList");
 
 const BUCKET = "portfolio-media";
-
+const CLOUDINARY_CLOUD_NAME = "eanf63bz";
+const CLOUDINARY_UPLOAD_PRESET = "portfolio_videos";
 // تسجيل الدخول
 loginForm.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -75,6 +76,29 @@ async function uploadFile(file, folder) {
 
   return data.publicUrl;
 }
+async function uploadVideoToCloudinary(file) {
+  if (!file) return null;
+
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+
+  const response = await fetch(
+    `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/video/upload`,
+    {
+      method: "POST",
+      body: formData
+    }
+  );
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.error?.message || "فشل رفع الفيديو");
+  }
+
+  return result.secure_url;
+}
 
 // إضافة مشروع
 projectForm.addEventListener("submit", async (event) => {
@@ -93,7 +117,7 @@ projectForm.addEventListener("submit", async (event) => {
     const videoFile = document.getElementById("video").files[0];
 
     const imageUrl = await uploadFile(imageFile, "images");
-    const videoUrl = await uploadFile(videoFile, "videos");
+    const videoUrl = await uploadVideoToCloudinary(videoFile);
 
     const { error } = await supabaseClient
       .from("projects")
