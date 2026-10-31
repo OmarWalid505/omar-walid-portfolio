@@ -217,9 +217,10 @@ projectGrid.addEventListener("click", event => {
 
   const image = event.target.closest(".project-thumb img");
 
-  if (image) {
-    openGallery([image.src], 0);
-  }
+if (image) {
+  openGallery([image.src], 0);
+  return;
+}
 });
 
 // Close Project Details
