@@ -1,3 +1,6 @@
+html {
+  scroll-behavior: smooth;
+}
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#070a0f;--panel:#0b1019;--panel2:#101827;--text:#f4f7fb;--muted:#9aa6b7;--line:#1c293a;--blue:#398bff;--blue2:#73b4ff;--shadow:0 18px 50px #0006}
 body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;transition:background .25s,color .25s}
