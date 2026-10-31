@@ -20,6 +20,8 @@ const projectGrid = document.getElementById("projectGrid");
 const dialog = document.getElementById("projectDialog");
 
 // فلترة المشاريع
+
+// فلترة المشاريع
 function applyFilter(category) {
   const projects = document.querySelectorAll(".project-card");
 
@@ -43,18 +45,29 @@ function applyFilter(category) {
   });
 }
 
+// تشغيل أزرار الفلترة
 filters.forEach(button => {
   button.addEventListener("click", () => {
+    console.log("Selected filter:", button.dataset.filter);
+
     applyFilter(button.dataset.filter);
+
+    console.log(
+      "Visible projects:",
+      [...document.querySelectorAll(".project-card")]
+        .filter(project => !project.classList.contains("hidden")).length
+    );
   });
 });
 
+// أزرار التخصصات
 document.querySelectorAll(".specialty-card[data-filter]").forEach(card => {
   card.addEventListener("click", () => {
     applyFilter(card.dataset.filter);
   });
 });
 
+// تصنيفات Multimedia الفرعية
 document.querySelectorAll(".multimedia-subcategories button").forEach(button => {
   button.addEventListener("click", () => {
     applyFilter(button.dataset.filter);
