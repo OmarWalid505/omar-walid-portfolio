@@ -273,6 +273,4 @@ document.getElementById("year").textContent =
   new Date().getFullYear();
 
 // Load Projects
-// Load Projects
-// Load Projects
 loadPortfolioProjects();
