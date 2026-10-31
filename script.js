@@ -273,4 +273,12 @@ document.getElementById("year").textContent =
   new Date().getFullYear();
 
 // Load Projects
-loadPortfolioProjects();
+if (window.location.hash === "#contact") {
+  history.scrollRestoration = "manual";
+}
+
+loadPortfolioProjects().then(() => {
+  if (window.location.hash === "#contact") {
+    document.getElementById("contact").scrollIntoView();
+  }
+});
