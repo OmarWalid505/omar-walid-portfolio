@@ -273,8 +273,4 @@ document.getElementById("year").textContent =
   new Date().getFullYear();
 
 // Load Projects
-
-    document.getElementById("contact").scrollIntoView();
-  }
-});
 loadPortfolioProjects();
