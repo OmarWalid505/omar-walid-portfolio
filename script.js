@@ -140,6 +140,7 @@ async function loadPortfolioProjects() {
 // تفاصيل المشروع
 // Image Gallery
 const imageViewer = document.getElementById("imageViewer");
+console.log("Image Viewer:", imageViewer);
 const viewerImage = document.getElementById("viewerImage");
 const imageViewerClose = document.getElementById("imageViewerClose");
 const prevImage = document.getElementById("prevImage");
