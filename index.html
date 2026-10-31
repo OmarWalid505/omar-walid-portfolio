@@ -118,20 +118,23 @@
   <footer><a class="logo" href="#home">OMAR <span>WALID</span></a><p>© <span id="year"></span> Omar Walid. All rights reserved.</p><a href="#home">Back to top ↑</a></footer>
 
   <dialog id="projectDialog" class="project-dialog">
-    <button class="dialog-close" id="dialogClose" aria-label="Close">×</button>
-    <p class="eyebrow">PROJECT DETAILS</p><h2 id="dialogTitle"></h2><p id="dialogDescription"></p><p class="dialog-tools" id="dialogTools"></p>
-  <dialog id="imageViewer" class="image-viewer">
+  <button class="dialog-close" id="dialogClose" aria-label="Close">×</button>
+  <p class="eyebrow">PROJECT DETAILS</p>
+  <h2 id="dialogTitle"></h2>
+  <p id="dialogDescription"></p>
+  <p class="dialog-tools" id="dialogTools"></p>
+</dialog>
+
+<dialog id="imageViewer" class="image-viewer">
   <button class="image-viewer-close" id="imageViewerClose">×</button>
-
   <button class="gallery-arrow prev" id="prevImage">‹</button>
-
   <img id="viewerImage" src="" alt="Project Image">
-
   <button class="gallery-arrow next" id="nextImage">›</button>
-
   <p id="imageCounter"></p>
 </dialog>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="script.js"></script>
+
 </body>
 </html>
