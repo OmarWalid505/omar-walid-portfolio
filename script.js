@@ -277,13 +277,21 @@ if (window.location.hash === "#contact") {
   history.scrollRestoration = "manual";
 }
 
-loadPortfolioProjects().then(() => {
+loadPortfolioProjects().then(async () => {
   if (window.location.hash === "#contact") {
-    requestAnimationFrame(() => {
-      window.scrollTo({
-        top: document.getElementById("contact").offsetTop,
-        behavior: "instant"
-      });
-    });
+    const images = [...document.querySelectorAll("#projectGrid img")];
+
+    await Promise.all(
+      images.map(img => {
+        if (img.complete) return Promise.resolve();
+
+        return new Promise(resolve => {
+          img.addEventListener("load", resolve, { once: true });
+          img.addEventListener("error", resolve, { once: true });
+        });
+      })
+    );
+
+    document.getElementById("contact").scrollIntoView();
   }
 });
