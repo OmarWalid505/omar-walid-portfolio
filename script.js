@@ -155,6 +155,7 @@ async function loadPortfolioProjects() {
 const imageViewer = document.getElementById("imageViewer");
 console.log("Image Viewer:", imageViewer);
 const viewerImage = document.getElementById("viewerImage");
+const viewerVideo = document.getElementById("viewerVideo");
 const imageViewerClose = document.getElementById("imageViewerClose");
 const prevImage = document.getElementById("prevImage");
 const nextImage = document.getElementById("nextImage");
@@ -164,7 +165,25 @@ let galleryImages = [];
 let currentImageIndex = 0;
 
 function showGalleryImage() {
-  viewerImage.src = galleryImages[currentImageIndex];
+  const currentMedia = galleryImages[currentImageIndex];
+
+  if (currentMedia.type === "video") {
+    viewerImage.hidden = true;
+    viewerVideo.hidden = false;
+
+    viewerVideo.src = currentMedia.url;
+    viewerVideo.load();
+    viewerVideo.play();
+
+  } else {
+    viewerVideo.pause();
+    viewerVideo.removeAttribute("src");
+    viewerVideo.load();
+
+    viewerVideo.hidden = true;
+    viewerImage.hidden = false;
+    viewerImage.src = currentMedia.url;
+  }
 
   imageCounter.textContent =
     `${currentImageIndex + 1} / ${galleryImages.length}`;
@@ -230,16 +249,15 @@ projectGrid.addEventListener("click", event => {
   }
 
   const image = event.target.closest(".project-thumb img");
-  console.log("Image clicked:", image);
+const video = event.target.closest(".project-thumb video");
 
 if (image) {
-  console.log("Image clicked:", image);
-  console.log("Image URL:", image.src);
-  console.log("Viewer:", imageViewer);
+  openGallery([{ type: "image", url: image.src }], 0);
+  return;
+}
 
-  openGallery([image.src], 0);
-
-  console.log("Viewer opened:", imageViewer.open);
+if (video) {
+  openGallery([{ type: "video", url: video.src }], 0);
   return;
 }
 });
