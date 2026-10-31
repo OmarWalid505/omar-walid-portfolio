@@ -81,6 +81,58 @@ async function uploadFile(file, folder) {
 
   return data.publicUrl;
 }
+// CV Upload
+async function loadCVStatus() {
+  const { data: files, error } = await supabaseClient
+    .storage
+    .from(BUCKET)
+    .list("cv");
+
+  if (error) {
+    cvStatus.textContent = "تعذر التحقق من ملف CV";
+    return;
+  }
+
+  const exists = files.some(file => file.name === "current.pdf");
+
+  cvStatus.textContent = exists
+    ? "يوجد ملف CV مرفوع حاليًا"
+    : "لا يوجد ملف CV مرفوع حاليًا";
+}
+
+cvForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const file = document.getElementById("cvFile").files[0];
+
+  if (!file) return;
+
+  if (file.type !== "application/pdf") {
+    cvMessage.textContent = "من فضلك اختر ملف PDF فقط";
+    return;
+  }
+
+  cvMessage.textContent = "جاري رفع ملف CV...";
+
+  const { error } = await supabaseClient
+    .storage
+    .from(BUCKET)
+    .upload(CV_PATH, file, {
+      upsert: true,
+      contentType: "application/pdf",
+      cacheControl: "0"
+    });
+
+  if (error) {
+    cvMessage.textContent = "حدث خطأ: " + error.message;
+    return;
+  }
+
+  cvMessage.textContent = "تم رفع CV بنجاح";
+  cvForm.reset();
+
+  await loadCVStatus();
+});
 async function uploadVideoToCloudinary(file) {
   if (!file) return null;
 
