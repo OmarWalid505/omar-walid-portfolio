@@ -219,7 +219,13 @@ projectGrid.addEventListener("click", event => {
   console.log("Image clicked:", image);
 
 if (image) {
+  console.log("Image clicked:", image);
+  console.log("Image URL:", image.src);
+  console.log("Viewer:", imageViewer);
+
   openGallery([image.src], 0);
+
+  console.log("Viewer opened:", imageViewer.open);
   return;
 }
 });
