@@ -279,6 +279,11 @@ if (window.location.hash === "#contact") {
 
 loadPortfolioProjects().then(() => {
   if (window.location.hash === "#contact") {
-    document.getElementById("contact").scrollIntoView();
+    requestAnimationFrame(() => {
+      window.scrollTo({
+        top: document.getElementById("contact").offsetTop,
+        behavior: "instant"
+      });
+    });
   }
 });
