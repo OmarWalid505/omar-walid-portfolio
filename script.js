@@ -220,7 +220,16 @@ nextImage.addEventListener("click", () => {
 });
 
 imageViewerClose.addEventListener("click", () => {
+  viewerVideo.pause();
+  viewerVideo.removeAttribute("src");
+  viewerVideo.load();
   imageViewer.close();
+});
+
+imageViewer.addEventListener("close", () => {
+  viewerVideo.pause();
+  viewerVideo.removeAttribute("src");
+  viewerVideo.load();
 });
 
 imageViewer.addEventListener("click", event => {
