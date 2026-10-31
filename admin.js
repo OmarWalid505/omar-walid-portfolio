@@ -49,7 +49,9 @@ loginForm.addEventListener("submit", async (event) => {
 async function showDashboard() {
   loginForm.hidden = true;
   dashboard.hidden = false;
+
   await loadProjects();
+  await loadCVStatus();
 }
 
 // التحقق من جلسة المدير
