@@ -217,12 +217,17 @@ nextImage.addEventListener("click", () => {
   changeGalleryImage(1);
 });
 
-imageViewerClose.addEventListener("click", () => {
+function closeImageViewer() {
   viewerVideo.pause();
   viewerVideo.removeAttribute("src");
   viewerVideo.load();
-  imageViewer.close();
-});
+
+  if (imageViewer.open) {
+    imageViewer.close();
+  }
+}
+
+imageViewerClose.addEventListener("click", closeImageViewer);
 
 imageViewer.addEventListener("close", () => {
   viewerVideo.pause();
