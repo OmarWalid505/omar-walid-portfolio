@@ -236,15 +236,7 @@ imageViewer.addEventListener("close", () => {
 });
 
 imageViewer.addEventListener("click", event => {
-  const rect = imageViewer.getBoundingClientRect();
-
-  const outside =
-    event.clientX < rect.left ||
-    event.clientX > rect.right ||
-    event.clientY < rect.top ||
-    event.clientY > rect.bottom;
-
-  if (outside) {
+  if (event.target === imageViewer) {
     closeImageViewer();
   }
 });
