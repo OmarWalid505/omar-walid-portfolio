@@ -432,3 +432,24 @@ dialog.image-viewer:not([open]) {
 .image-viewer [hidden] {
   display: none !important;
 }
+/* GitHub View Code Button */
+.view-code-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 7px 12px;
+  border: 1px solid var(--blue);
+  border-radius: 4px;
+  color: var(--blue2);
+  background: transparent;
+  font-size: 10px;
+  font-weight: 700;
+  transition: .2s ease;
+}
+
+.view-code-button:hover {
+  background: var(--blue);
+  color: white;
+  transform: translateY(-2px);
+}
