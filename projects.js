@@ -270,9 +270,11 @@ imageViewer.addEventListener("click", event => {
 
 // Project Details and Image Click
 projectGrid.addEventListener("click", event => {
-
+  const link = event.target.closest("a");
+  if (link) return;
+  
   const button = event.target.closest(".details-button");
-
+  
   if (button) {
     document.getElementById("dialogTitle").textContent =
       button.dataset.title;
