@@ -5,10 +5,6 @@ const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
-const menuToggle = document.getElementById("menuToggle");
-const nav = document.getElementById("nav");
-menuToggle.addEventListener("click", () => nav.classList.toggle("open"));
-nav.querySelectorAll("a").forEach(link => link.addEventListener("click", () => nav.classList.remove("open")));
 
 document.getElementById("themeToggle").addEventListener("click", () => {
   document.body.classList.toggle("light");
@@ -57,20 +53,6 @@ filters.forEach(button => {
       [...document.querySelectorAll(".project-card")]
         .filter(project => !project.classList.contains("hidden")).length
     );
-  });
-});
-
-// أزرار التخصصات
-document.querySelectorAll(".specialty-card[data-filter]").forEach(card => {
-  card.addEventListener("click", () => {
-    applyFilter(card.dataset.filter);
-  });
-});
-
-// تصنيفات Multimedia الفرعية
-document.querySelectorAll(".multimedia-subcategories button").forEach(button => {
-  button.addEventListener("click", () => {
-    applyFilter(button.dataset.filter);
   });
 });
 
