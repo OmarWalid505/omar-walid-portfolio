@@ -194,6 +194,9 @@ function showGalleryImage() {
 function openGallery(images, index, description = "") {
   galleryImages = images;
   currentImageIndex = index;
+  
+  console.log("Gallery images:", galleryImages);
+  console.log("Current media:", galleryImages[currentImageIndex]);
 
   viewerDescription.textContent = description;
 
