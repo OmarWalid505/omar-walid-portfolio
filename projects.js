@@ -161,6 +161,7 @@ let currentImageIndex = 0;
 
 function showGalleryImage() {
   const currentMedia = galleryImages[currentImageIndex];
+  
 
   if (currentMedia.type === "video") {
     viewerImage.hidden = true;
