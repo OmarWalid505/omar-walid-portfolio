@@ -129,6 +129,28 @@ body.light{--bg:#f4f7fb;--panel:#fff;--panel2:#fff;--text:#101827;--muted:#64748
   border-style: dashed;
   opacity: .4;
 }
+/* Orbit Animation */
+
+.orbit-one {
+  animation: orbitRotate 18s linear infinite;
+}
+
+.orbit-two {
+  animation: orbitRotate 25s linear infinite reverse;
+}
+
+.orbit-three {
+  animation: orbitRotate 35s linear infinite;
+}
+
+@keyframes orbitRotate {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: 360deg;
+  }
+}
 /* Hero Tech Details */
 
 .tech-detail {
