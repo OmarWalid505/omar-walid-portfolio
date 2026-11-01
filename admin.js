@@ -258,30 +258,87 @@ async function loadProjects() {
 }
 
 // تعديل المشروع
-async function editProject(project) {
-  const title = prompt("اسم المشروع:", project.title);
-  if (title === null) return;
+// تعديل المشروع
+function editProject(project) {
+  document.getElementById("editProjectId").value = project.id;
+  document.getElementById("editTitle").value = project.title || "";
+  document.getElementById("editDescription").value = project.description || "";
+  document.getElementById("editCategory").value = project.category || "";
+  document.getElementById("editTools").value = project.tools || "";
+  document.getElementById("editProjectUrl").value = project.project_url || "";
 
-  const description = prompt("وصف المشروع:", project.description || "");
-  if (description === null) return;
+  document.getElementById("editImage").value = "";
+  document.getElementById("editVideo").value = "";
 
-  const tools = prompt("الأدوات المستخدمة:", project.tools || "");
-  if (tools === null) return;
+  document.getElementById("editMessage").textContent = "";
 
-  const { error } = await supabaseClient
-    .from("projects")
-    .update({ title, description, tools })
-    .eq("id", project.id);
-
-  if (error) {
-    alert("حدث خطأ أثناء التعديل: " + error.message);
-    return;
-  }
-
-  alert("تم تعديل المشروع بنجاح");
-  await loadProjects();
+  document.getElementById("editProjectForm").hidden = false;
+  document.getElementById("editProjectForm").scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
 }
+// حفظ تعديلات المشروع
+document.getElementById("editProjectForm").addEventListener("submit", async (event) => {
+  event.preventDefault();
 
+  const editMessage = document.getElementById("editMessage");
+  editMessage.textContent = "جاري حفظ التعديلات...";
+
+  try {
+    const projectId = document.getElementById("editProjectId").value;
+
+    const title = document.getElementById("editTitle").value;
+    const description = document.getElementById("editDescription").value;
+    const category = document.getElementById("editCategory").value;
+    const tools = document.getElementById("editTools").value;
+    const projectUrl = document.getElementById("editProjectUrl").value;
+
+    const imageFile = document.getElementById("editImage").files[0];
+    const videoFile = document.getElementById("editVideo").files[0];
+
+    const updates = {
+      title,
+      description,
+      category,
+      tools,
+      project_url: projectUrl || null
+    };
+
+    // رفع صورة جديدة عند اختيارها فقط
+    if (imageFile) {
+      updates.image_url = await uploadFile(imageFile, "images");
+    }
+
+    // رفع فيديو جديد عند اختياره فقط
+    if (videoFile) {
+      updates.video_url = await uploadVideoToCloudinary(videoFile);
+    }
+
+    const { error } = await supabaseClient
+      .from("projects")
+      .update(updates)
+      .eq("id", projectId);
+
+    if (error) throw error;
+
+    editMessage.textContent = "تم تعديل المشروع بنجاح";
+
+    document.getElementById("editProjectForm").reset();
+    document.getElementById("editProjectForm").hidden = true;
+
+    await loadProjects();
+
+  } catch (error) {
+    editMessage.textContent = "حدث خطأ: " + error.message;
+  }
+});
+
+// إلغاء التعديل
+document.getElementById("cancelEdit").addEventListener("click", () => {
+  document.getElementById("editProjectForm").reset();
+  document.getElementById("editProjectForm").hidden = true;
+});
 // حذف المشروع
 async function deleteProject(id) {
   if (!confirm("هل أنت متأكد من حذف هذا المشروع؟")) return;
