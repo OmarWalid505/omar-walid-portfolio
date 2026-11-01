@@ -410,3 +410,10 @@ dialog.image-viewer::backdrop {
 #contact {
   scroll-margin-top: 90px;
 }
+.viewer-description {
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+    color: #fff;
+    direction: rtl;
+}
