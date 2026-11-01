@@ -5,6 +5,18 @@ const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
+const menuToggle = document.getElementById("menuToggle");
+const nav = document.getElementById("nav");
+
+menuToggle.addEventListener("click", () => {
+  nav.classList.toggle("open");
+});
+
+nav.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    nav.classList.remove("open");
+  });
+});
 
 document.getElementById("themeToggle").addEventListener("click", () => {
   document.body.classList.toggle("light");
@@ -284,6 +296,10 @@ document.getElementById("year").textContent =
 // Load Projects
 loadPortfolioProjects().then(() => {
   if (window.location.hash === "#contact") {
-    document.getElementById("contact").scrollIntoView();
+    const contact = document.getElementById("contact");
+
+    if (contact) {
+      contact.scrollIntoView();
+    }
   }
 });
