@@ -267,7 +267,8 @@ function editProject(project) {
   document.getElementById("editDescription").value = project.description || "";
   document.getElementById("editCategory").value = project.category || "";
   document.getElementById("editTools").value = project.tools || "";
-  document.getElementById("editProjectUrl").value = project.project_url || "";
+  document.getElementById("editLivePreviewUrl").value = project.live_preview_url || "";
+document.getElementById("editGithubUrl").value = project.github_url || project.project_url || "";
 
   document.getElementById("editImage").value = "";
   document.getElementById("editVideo").value = "";
