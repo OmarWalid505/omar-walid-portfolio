@@ -190,9 +190,11 @@ function showGalleryImage() {
     galleryImages.length > 1 ? "block" : "none";
 }
 
-function openGallery(images, index) {
+function openGallery(images, index, description = "") {
   galleryImages = images;
   currentImageIndex = index;
+
+  viewerDescription.textContent = description;
 
   showGalleryImage();
   imageViewer.showModal();
