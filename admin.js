@@ -83,6 +83,19 @@ async function uploadFile(file, folder) {
 
   return data.publicUrl;
 }
+// رفع مجموعة صور إلى Storage
+async function uploadMultipleImages(files) {
+  if (!files || files.length === 0) return [];
+
+  const imageUrls = [];
+
+  for (const file of files) {
+    const url = await uploadFile(file, "images");
+    imageUrls.push(url);
+  }
+
+  return imageUrls;
+}
 // CV Upload
 async function loadCVStatus() {
   const { data: files, error } = await supabaseClient
@@ -170,6 +183,11 @@ projectForm.addEventListener("submit", async (event) => {
     const description = document.getElementById("description").value;
     const category = document.getElementById("category").value;
     const tools = document.getElementById("tools").value;
+    const detailedDescription =
+  document.getElementById("detailedDescription").value;
+
+const galleryFiles =
+  document.getElementById("galleryImages").files;
    const livePreviewUrl = document.getElementById("livePreviewUrl").value;
 const githubUrl = document.getElementById("githubUrl").value;
 
@@ -177,20 +195,23 @@ const githubUrl = document.getElementById("githubUrl").value;
     const videoFile = document.getElementById("video").files[0];
 
     const imageUrl = await uploadFile(imageFile, "images");
-    const videoUrl = await uploadVideoToCloudinary(videoFile);
+const videoUrl = await uploadVideoToCloudinary(videoFile);
+const galleryImages = await uploadMultipleImages(galleryFiles);
 
     const { error } = await supabaseClient
       .from("projects")
       .insert([{
-        title,
-        description,
-        category,
-        tools,
-        image_url: imageUrl,
-        video_url: videoUrl,
-        live_preview_url: livePreviewUrl || null,
-github_url: githubUrl || null
-      }]);
+  title,
+  description,
+  category,
+  tools,
+  image_url: imageUrl,
+  video_url: videoUrl,
+  live_preview_url: livePreviewUrl || null,
+  github_url: githubUrl || null,
+  detailed_description: detailedDescription,
+  gallery_images: galleryImages,
+}]);
 
     if (error) throw error;
 
