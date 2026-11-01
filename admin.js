@@ -170,7 +170,8 @@ projectForm.addEventListener("submit", async (event) => {
     const description = document.getElementById("description").value;
     const category = document.getElementById("category").value;
     const tools = document.getElementById("tools").value;
-    const projectUrl = document.getElementById("projectUrl").value;
+   const livePreviewUrl = document.getElementById("livePreviewUrl").value;
+const githubUrl = document.getElementById("githubUrl").value;
 
     const imageFile = document.getElementById("image").files[0];
     const videoFile = document.getElementById("video").files[0];
@@ -187,7 +188,8 @@ projectForm.addEventListener("submit", async (event) => {
         tools,
         image_url: imageUrl,
         video_url: videoUrl,
-        project_url: projectUrl || null
+        live_preview_url: livePreviewUrl || null,
+github_url: githubUrl || null
       }]);
 
     if (error) throw error;
