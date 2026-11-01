@@ -254,16 +254,21 @@ projectGrid.addEventListener("click", event => {
     return;
   }
 
-  const image = event.target.closest(".project-thumb img");
+const image = event.target.closest(".project-thumb img");
 const video = event.target.closest(".project-thumb video");
 
-if (image) {
-  openGallery([{ type: "image", url: image.src }], 0);
-  return;
-}
+if (image || video) {
+  const media = image || video;
+  const projectCard = media.closest(".project-card");
 
-if (video) {
-  openGallery([{ type: "video", url: video.src }], 0);
+  const description = projectCard.querySelector(".details-button")
+    ?.dataset.description || "";
+
+  const gallery = image
+    ? [{ type: "image", url: image.src }]
+    : [{ type: "video", url: video.src }];
+
+  openGallery(gallery, 0, description);
   return;
 }
 });
