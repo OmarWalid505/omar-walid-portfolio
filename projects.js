@@ -285,6 +285,11 @@ dialog.addEventListener("click", event => {
   }
 });
 
+dialog.addEventListener("close", () => {
+  dialog.returnValue = "";
+});
+});
+
 // Keyboard Navigation
 document.addEventListener("keydown", event => {
   if (!imageViewer.open) return;
