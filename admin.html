@@ -99,6 +99,37 @@
         <button type="submit">إضافة المشروع</button>
         <p id="projectMessage"></p>
       </form>
+      <form class="admin-form" id="editProjectForm" hidden>
+  <h3>تعديل المشروع</h3>
+
+  <input type="hidden" id="editProjectId">
+
+  <input type="text" id="editTitle" placeholder="اسم المشروع" required>
+
+  <textarea id="editDescription" placeholder="وصف المشروع"></textarea>
+
+  <select id="editCategory" required>
+    <option value="">اختر التخصص</option>
+    <option value="Programming">Programming</option>
+    <option value="Video Editing">Video Editing</option>
+    <option value="Graphic Design">Graphic Design</option>
+  </select>
+
+  <input type="text" id="editTools" placeholder="البرامج والأدوات المستخدمة">
+
+  <label>استبدال صورة المشروع (اختياري)</label>
+  <input type="file" id="editImage" accept="image/*">
+
+  <label>استبدال فيديو المشروع (اختياري)</label>
+  <input type="file" id="editVideo" accept="video/*">
+
+  <input type="url" id="editProjectUrl" placeholder="رابط المشروع">
+
+  <button type="submit">حفظ التعديلات</button>
+  <button type="button" id="cancelEdit">إلغاء</button>
+
+  <p id="editMessage"></p>
+</form>
 
       <h2>المشاريع الحالية</h2>
       <div id="projectsList"></div>
