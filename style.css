@@ -115,12 +115,15 @@ body.light{--bg:#f4f7fb;--panel:#fff;--panel2:#fff;--text:#101827;--muted:#64748
   width: 72%;
   aspect-ratio: 1;
   transform: rotate(-25deg) scaleY(.55);
+  animation: orbitRotate 10s linear infinite;
 }
 
 .orbit-two {
   width: 58%;
   aspect-ratio: 1;
   transform: rotate(55deg) scaleY(.55);
+  animation: orbitRotate 14s linear infinite reverse;
+
 }
 
 .orbit-three {
@@ -128,6 +131,7 @@ body.light{--bg:#f4f7fb;--panel:#fff;--panel2:#fff;--text:#101827;--muted:#64748
   aspect-ratio: 1;
   border-style: dashed;
   opacity: .4;
+  animation: orbitRotate 20s linear infinite;
 }
 /* Orbit Animation */
 
