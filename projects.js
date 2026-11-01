@@ -131,6 +131,7 @@ async function loadPortfolioProjects() {
          href="${escapeHTML(project.live_preview_url)}"
          target="_blank"
          rel="noopener noreferrer">
+         onclick="console.log('Live Preview clicked')"
          Live Preview ↗
        </a>`
     : ""
