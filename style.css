@@ -422,3 +422,13 @@ dialog.image-viewer::backdrop {
 #contact {
   scroll-margin-top: 90px;
 }
+
+/* Fix Image Viewer appearing on page load */
+dialog.image-viewer:not([open]) {
+  display: none;
+}
+
+/* Hide media elements when hidden */
+.image-viewer [hidden] {
+  display: none !important;
+}
