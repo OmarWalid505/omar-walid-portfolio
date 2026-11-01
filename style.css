@@ -270,9 +270,27 @@ body.light{--bg:#f4f7fb;--panel:#fff;--panel2:#fff;--text:#101827;--muted:#64748
 .specialty-grid-two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .multimedia-card { position: relative; cursor: default; }
 .multimedia-subcategories { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
-.multimedia-subcategories button { border: 1px solid var(--border, rgba(255,255,255,.16)); background: transparent; color: inherit; padding: 10px 14px; border-radius: 8px; font: inherit; cursor: pointer; transition: .2s ease; }
-.multimedia-subcategories button:hover { border-color: var(--accent, #3988ff); color: var(--accent, #3988ff); }
-.multimedia-subcategories button span { margin-left: 8px; }
+.multimedia-subcategories a {
+    border: 1px solid var(--border, rgba(255,255,255,.16));
+    background: transparent;
+    color: inherit;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: .2s ease;
+}
+
+.multimedia-subcategories a:hover {
+    border-color: var(--accent, #3988ff);
+    color: var(--accent, #3988ff);
+}
+
+.multimedia-subcategories a span {
+    margin-left: 8px;
+}
 @media (max-width: 700px) { .specialty-grid-two { grid-template-columns: 1fr; } }
 /* Dynamic portfolio media */
 .project-thumb {
