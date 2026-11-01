@@ -294,7 +294,8 @@ document.getElementById("editProjectForm").addEventListener("submit", async (eve
     const description = document.getElementById("editDescription").value;
     const category = document.getElementById("editCategory").value;
     const tools = document.getElementById("editTools").value;
-    const projectUrl = document.getElementById("editProjectUrl").value;
+   const livePreviewUrl = document.getElementById("editLivePreviewUrl").value;
+const githubUrl = document.getElementById("editGithubUrl").value;
 
     const imageFile = document.getElementById("editImage").files[0];
     const videoFile = document.getElementById("editVideo").files[0];
@@ -304,7 +305,8 @@ document.getElementById("editProjectForm").addEventListener("submit", async (eve
       description,
       category,
       tools,
-      project_url: projectUrl || null
+      live_preview_url: livePreviewUrl || null,
+github_url: githubUrl || null
     };
 
     // رفع صورة جديدة عند اختيارها فقط
