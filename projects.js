@@ -295,6 +295,18 @@ document.getElementById("year").textContent =
 
 // Load Projects
 loadPortfolioProjects().then(() => {
+  const requestedFilter = new URLSearchParams(window.location.search).get("filter");
+
+  const validFilters = [
+    "Programming",
+    "Video Editing",
+    "Graphic Design"
+  ];
+
+  applyFilter(
+    validFilters.includes(requestedFilter) ? requestedFilter : "All"
+  );
+
   if (window.location.hash === "#contact") {
     const contact = document.getElementById("contact");
 
