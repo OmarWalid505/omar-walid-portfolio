@@ -122,9 +122,23 @@ async function loadPortfolioProjects() {
 
       <div class="project-info">
         <div>
-          <h3>${escapeHTML(project.title)}</h3>
-          <p>${escapeHTML(project.description)}</p>
-        </div>
+  <h3>${escapeHTML(project.title)}</h3>
+  <p>${escapeHTML(project.description)}</p>
+
+  ${
+    project.category === "Programming" &&
+    project.project_url &&
+    project.project_url.startsWith("https://github.com/")
+      ? `<a
+           class="view-code-button"
+           href="${escapeHTML(project.project_url)}"
+           target="_blank"
+           rel="noopener noreferrer">
+           View Code ↗
+         </a>`
+      : ""
+  }
+</div>
 
         <button
           class="details-button"
