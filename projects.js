@@ -154,6 +154,7 @@ const imageViewerClose = document.getElementById("imageViewerClose");
 const prevImage = document.getElementById("prevImage");
 const nextImage = document.getElementById("nextImage");
 const imageCounter = document.getElementById("imageCounter");
+const viewerDescription = document.getElementById("viewerDescription");
 
 let galleryImages = [];
 let currentImageIndex = 0;
