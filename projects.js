@@ -87,6 +87,7 @@ async function loadPortfolioProjects() {
     .from("projects")
     .select("*")
     .order("created_at", { ascending: false });
+  console.log("Projects data:", data);
 
   if (error) {
     console.error("Projects loading error:", error.message);
