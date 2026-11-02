@@ -96,6 +96,7 @@ async function loadPortfolioProjects() {
   }
 
   projectGrid.replaceChildren();
+  window.currentProjects = data;
 
   if (data.length === 0) {
     projectGrid.textContent = "No projects available yet.";
@@ -296,15 +297,43 @@ if (image || video) {
   const media = image || video;
   const projectCard = media.closest(".project-card");
 
-  const description = projectCard.querySelector(".details-button")
-    ?.dataset.description || "";
+  const projectTitle =
+    projectCard.querySelector("h3").textContent;
 
-  const gallery = image
-    ? [{ type: "image", url: image.src }]
-    : [{ type: "video", url: video.src }];
+  const project = window.currentProjects?.find(
+    item => item.title === projectTitle
+  );
 
-  openGallery(gallery, 0, description);
+  const gallery = [];
+
+  if (project?.image_url) {
+    gallery.push({
+      type: "image",
+      url: project.image_url
+    });
+  }
+
+  if (project?.gallery_images?.length) {
+    project.gallery_images.forEach(url => {
+      gallery.push({
+        type: "image",
+        url: url
+      });
+    });
+  }
+
+  if (project?.video_url) {
+    gallery.push({
+      type: "video",
+      url: project.video_url
+    });
+  }
+
+  if (gallery.length === 0) return;
+
+  openGallery(gallery, 0, project.description || "");
   return;
+}
 }
 });
 
