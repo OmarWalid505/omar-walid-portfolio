@@ -192,10 +192,22 @@ const galleryFiles =
 const githubUrl = document.getElementById("githubUrl").value;
 
     const imageFile = document.getElementById("image").files[0];
-    const videoFile = document.getElementById("video").files[0];
+    const videoFiles = Array.from(
+  document.getElementById("video").files
+);
 
+if (videoFiles.length > 3) {
+  throw new Error("مسموح بإضافة 3 فيديوهات كحد أقصى");
+}
     const imageUrl = await uploadFile(imageFile, "images");
-const videoUrl = await uploadVideoToCloudinary(videoFile);
+const videoUrls = [];
+
+for (const file of videoFiles) {
+  const url = await uploadVideoToCloudinary(file);
+  videoUrls.push(url);
+}
+
+const videoUrl = videoUrls[0] || null;
 const galleryImages = await uploadMultipleImages(galleryFiles);
 
     const { error } = await supabaseClient
@@ -211,6 +223,7 @@ const galleryImages = await uploadMultipleImages(galleryFiles);
   github_url: githubUrl || null,
   detailed_description: detailedDescription,
   gallery_images: galleryImages,
+  gallery_videos: videoUrls,
 }]);
 
     if (error) throw error;
