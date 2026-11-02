@@ -334,7 +334,6 @@ if (image || video) {
   openGallery(gallery, 0, project.description || "");
   return;
 }
-}
 });
 
 // Close Project Details
