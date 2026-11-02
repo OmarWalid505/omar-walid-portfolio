@@ -355,10 +355,10 @@ const newImages = await uploadMultipleImages(galleryFiles);
 
 updates.gallery_images = [...oldImages, ...newImages];
 
-    // رفع صورة جديدة عند اختيارها فقط
-    if (imageFile) {
-      updates.image_url = await uploadFile(imageFile, "images");
-    }
+// رفع صورة جديدة عند اختيارها فقط
+if (imageFile) {
+  updates.image_url = await uploadFile(imageFile, "images");
+}
 
     // رفع فيديو جديد عند اختياره فقط
     if (videoFile) {
