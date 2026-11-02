@@ -461,4 +461,18 @@ dialog.image-viewer:not([open]) {
   color: white;
   transform: translateY(-2px);
 }
+video,
+.project-dialog img,
+.project-dialog video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
 
+video:fullscreen {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000;
+}
