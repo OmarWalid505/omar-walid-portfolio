@@ -354,7 +354,6 @@ const oldImages = currentProject.gallery_images || [];
 const newImages = await uploadMultipleImages(galleryFiles);
 
 updates.gallery_images = [...oldImages, ...newImages];
-    };
 
     // رفع صورة جديدة عند اختيارها فقط
     if (imageFile) {
