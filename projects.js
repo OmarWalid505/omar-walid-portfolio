@@ -305,29 +305,62 @@ if (image || video) {
   );
 
   const gallery = [];
+const addedImages = new Set();
 
-  if (project?.image_url) {
+// الصورة الأساسية
+if (project?.image_url) {
+  const url = project.image_url.trim();
+
+  if (!addedImages.has(url)) {
+    addedImages.add(url);
+
     gallery.push({
       type: "image",
-      url: project.image_url
+      url: url
     });
   }
+}
 
-  if (project?.gallery_images?.length) {
-    project.gallery_images.forEach(url => {
+// الصور الإضافية بدون تكرار
+if (project?.gallery_images?.length) {
+  project.gallery_images.forEach(url => {
+    const cleanUrl = url.trim();
+
+    if (cleanUrl && !addedImages.has(cleanUrl)) {
+      addedImages.add(cleanUrl);
+
       gallery.push({
         type: "image",
+        url: cleanUrl
+      });
+    }
+  });
+}
+const addedVideos = new Set();
+
+// الفيديو القديم
+if (project?.video_url) {
+  addedVideos.add(project.video_url);
+
+  gallery.push({
+    type: "video",
+    url: project.video_url
+  });
+}
+
+// الفيديوهات الإضافية
+if (project?.gallery_videos?.length) {
+  project.gallery_videos.forEach(url => {
+    if (url && !addedVideos.has(url)) {
+      addedVideos.add(url);
+
+      gallery.push({
+        type: "video",
         url: url
       });
-    });
-  }
-
-  if (project?.video_url) {
-    gallery.push({
-      type: "video",
-      url: project.video_url
-    });
-  }
+    }
+  });
+}
 
   if (gallery.length === 0) return;
 
