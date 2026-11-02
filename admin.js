@@ -295,6 +295,7 @@ document.getElementById("editGithubUrl").value = project.github_url || project.p
 
   document.getElementById("editImage").value = "";
   document.getElementById("editVideo").value = "";
+  document.getElementById("editGalleryImages").value = "";
 
   document.getElementById("editMessage").textContent = "";
 
@@ -318,6 +319,11 @@ document.getElementById("editProjectForm").addEventListener("submit", async (eve
     const description = document.getElementById("editDescription").value;
     const category = document.getElementById("editCategory").value;
     const tools = document.getElementById("editTools").value;
+    const detailedDescription =
+  document.getElementById("editDetailedDescription").value;
+
+const galleryFiles =
+  document.getElementById("editGalleryImages").files;
    const livePreviewUrl = document.getElementById("editLivePreviewUrl").value;
 const githubUrl = document.getElementById("editGithubUrl").value;
 
@@ -325,12 +331,29 @@ const githubUrl = document.getElementById("editGithubUrl").value;
     const videoFile = document.getElementById("editVideo").files[0];
 
     const updates = {
-      title,
-      description,
-      category,
-      tools,
-      live_preview_url: livePreviewUrl || null,
-github_url: githubUrl || null
+  title,
+  description,
+  category,
+  tools,
+  live_preview_url: livePreviewUrl || null,
+  github_url: githubUrl || null,
+  detailed_description: detailedDescription
+};
+    // الاحتفاظ بالصور القديمة وإضافة الصور الجديدة
+const { data: currentProject, error: fetchError } =
+  await supabaseClient
+    .from("projects")
+    .select("gallery_images")
+    .eq("id", projectId)
+    .single();
+
+if (fetchError) throw fetchError;
+
+const oldImages = currentProject.gallery_images || [];
+
+const newImages = await uploadMultipleImages(galleryFiles);
+
+updates.gallery_images = [...oldImages, ...newImages];
     };
 
     // رفع صورة جديدة عند اختيارها فقط
