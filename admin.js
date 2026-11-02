@@ -286,6 +286,8 @@ function editProject(project) {
   document.getElementById("editProjectId").value = project.id;
   document.getElementById("editTitle").value = project.title || "";
   document.getElementById("editDescription").value = project.description || "";
+  document.getElementById("editDetailedDescription").value =
+  project.detailed_description || "";
   document.getElementById("editCategory").value = project.category || "";
   document.getElementById("editTools").value = project.tools || "";
   document.getElementById("editLivePreviewUrl").value = project.live_preview_url || "";
