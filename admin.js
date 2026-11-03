@@ -208,7 +208,15 @@ for (const file of videoFiles) {
 }
 
 const videoUrl = videoUrls[0] || null;
-const galleryImages = await uploadMultipleImages(galleryFiles);
+const filteredGalleryFiles = Array.from(galleryFiles).filter(file => {
+  return !imageFile || (
+    file.name !== imageFile.name ||
+    file.size !== imageFile.size ||
+    file.lastModified !== imageFile.lastModified
+  );
+});
+
+const galleryImages = await uploadMultipleImages(filteredGalleryFiles);
 
     const { error } = await supabaseClient
       .from("projects")
